@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -208,7 +207,33 @@ public class CarouselView extends FrameLayout {
     } else {
       this.currentItem = item;
     }
-    this.carouselRecyclerView.smoothScrollToPosition(this.currentItem);
+
+    // TODO check ci to netreba
+//    this.carouselRecyclerView.smoothScrollToPosition(this.currentItem);
+  }
+
+  public void smoothScrollToItem(int index) {
+    setCurrentItem(index);
+
+    int indexToScroll = currentItem;
+    if(indexToScroll == 0) {
+      indexToScroll = 1;
+    }
+    else if(indexToScroll == size - 1) {
+      indexToScroll = size - 2;
+    }
+
+    carouselRecyclerView.scrollToPosition(indexToScroll);
+    carouselRecyclerView.post(() -> {
+      View view = layoutManager.findViewByPosition(currentItem);
+      if (view == null) {
+        return;
+      }
+      int[] snapDistance = snapHelper.calculateDistanceToFinalSnap(layoutManager, view);
+      if (snapDistance[0] != 0 || snapDistance[1] != 0) {
+        carouselRecyclerView.smoothScrollBy(snapDistance[0], snapDistance[1]);
+      }
+    });
   }
 
   public int getCurrentItem() {

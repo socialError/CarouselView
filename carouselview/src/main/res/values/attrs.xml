@@ -27,7 +27,7 @@
         <attr name="indicatorPadding" format="integer" />
         <attr name="indicatorSelectedColor" format="reference" />
         <attr name="indicatorUnselectedColor" format="reference" />
-        <attr name="size" format="integer" />
+        <attr name="item_size" format="integer" />
         <attr name="item_spacing" format="integer" />
         <attr name="resource" format="reference" />
     </declare-styleable>

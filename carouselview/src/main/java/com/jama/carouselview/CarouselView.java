@@ -88,7 +88,7 @@ public class CarouselView extends FrameLayout {
       this.setIndicatorAnimationType(this.getAnimation(attributes.getInteger(R.styleable.CarouselView_indicatorAnimationType, 0)));
       this.setIndicatorRadius(attributes.getInteger(R.styleable.CarouselView_indicatorRadius, 5));
       this.setIndicatorPadding(attributes.getInteger(R.styleable.CarouselView_indicatorPadding, 5));
-      this.setSize(attributes.getInteger(R.styleable.CarouselView_size, 0));
+      this.setSize(attributes.getInteger(R.styleable.CarouselView_item_size, 0));
       this.setSpacing(attributes.getInteger(R.styleable.CarouselView_item_spacing, 0));
       attributes.recycle();
     }

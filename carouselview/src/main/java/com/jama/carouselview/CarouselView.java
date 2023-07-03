@@ -209,6 +209,7 @@ public class CarouselView extends FrameLayout {
     }
 
     // TODO check ci to netreba
+
 //    this.carouselRecyclerView.smoothScrollToPosition(this.currentItem);
   }
 

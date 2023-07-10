@@ -132,13 +132,15 @@ public class CarouselView extends FrameLayout {
       public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
         View centerView = snapHelper.findSnapView(layoutManager);
-        int position = layoutManager.getPosition(centerView);
-        if (carouselScrollListener != null) {
-          carouselScrollListener.onScrollStateChanged(recyclerView, newState, position);
-        }
-        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-          pageIndicatorView.setSelection(position);
-          setCurrentItem(position);
+        if(centerView != null) {
+          int position = layoutManager.getPosition(centerView);
+          if (carouselScrollListener != null) {
+            carouselScrollListener.onScrollStateChanged(recyclerView, newState, position);
+          }
+          if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+            pageIndicatorView.setSelection(position);
+            setCurrentItem(position);
+          }
         }
       }
 

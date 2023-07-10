@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.jama.carouselview.CarouselOnManualSelectionListener;
 import com.jama.carouselview.CarouselView;
 import com.jama.carouselview.CarouselViewListener;
 import com.jama.carouselview.enums.OffsetType;
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     carouselView = findViewById(R.id.carouselView);
 
     List<Integer> images = new ArrayList<>();
+    images.add(R.drawable.boardwalk_by_the_ocean);
+    images.add(R.drawable.tying_down_tent_fly);
+    images.add(R.drawable.journal_and_coffee_at_table);
+
+    images.add(R.drawable.boardwalk_by_the_ocean);
+    images.add(R.drawable.tying_down_tent_fly);
+    images.add(R.drawable.journal_and_coffee_at_table);
+
     images.add(R.drawable.boardwalk_by_the_ocean);
     images.add(R.drawable.tying_down_tent_fly);
     images.add(R.drawable.journal_and_coffee_at_table);
@@ -72,7 +81,28 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    carouselView.setCarouselOnItemSelectedListener(new CarouselOnManualSelectionListener() {
+      @Override
+      public void onItemManuallySelected(int newPosition) {
+        Log.e("test", "pos " + newPosition);
+      }
+    });
+
     carouselView.show();
+
+    findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        carouselView.smoothScrollToItem(images.size() - 1);
+      }
+    });
+
+    findViewById(R.id.textView4).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        carouselView.smoothScrollToItem(0);
+      }
+    });
 
   }
 }

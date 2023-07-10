@@ -37,7 +37,7 @@ public class CarouselLinearLayoutManager extends LinearLayoutManager {
         float parentWidthHalf = parentWidth / 2.f;
 
         float d0 = 0.f;
-        float mShrinkDistance = .75f;
+        float mShrinkDistance = .25f;
         float d1 = mShrinkDistance * parentWidthHalf;
         float s0 = 1.f;
         float mShrinkAmount = 0.15f;

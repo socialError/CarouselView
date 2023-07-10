@@ -140,24 +140,31 @@ public class CarouselView extends FrameLayout {
         if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
           wasScrollingManually = true;
         }
-        View centerView = snapHelper.findSnapView(layoutManager);
-        if(snapHelper instanceof CustomSnapHelper) {
-          CustomSnapHelper snap = (CustomSnapHelper) snapHelper;
-          centerView = snap.findSnapViewOriginalImplementation(layoutManager);
+
+        int snapPosition = -1;
+
+        if(snapHelper instanceof CustomLinearSnapHelper) {
+          CustomLinearSnapHelper snap = (CustomLinearSnapHelper) snapHelper;
+          snapPosition = snap.getSnapPosition(layoutManager);
+        }
+        else {
+          View centerView = snapHelper.findSnapView(layoutManager);
+          if(centerView != null) {
+            snapPosition = layoutManager.getPosition(centerView);
+          }
         }
 
-        if(centerView != null) {
-          int position = layoutManager.getPosition(centerView);
+        if(snapPosition >= 0) {
           if (carouselScrollListener != null) {
-            carouselScrollListener.onScrollStateChanged(recyclerView, newState, position);
+            carouselScrollListener.onScrollStateChanged(recyclerView, newState, snapPosition);
           }
 
           if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-            pageIndicatorView.setSelection(position);
+            pageIndicatorView.setSelection(snapPosition);
             if (carouselOnItemSelectedListener != null && wasScrollingManually) {
-              carouselOnItemSelectedListener.onItemManuallySelected(position);
+              carouselOnItemSelectedListener.onItemManuallySelected(snapPosition);
             }
-            setCurrentItem(position);
+            setCurrentItem(snapPosition);
           }
         }
 
@@ -211,7 +218,7 @@ public class CarouselView extends FrameLayout {
     this.offsetType = offsetType;
     switch (offsetType) {
       case CENTER:
-        this.snapHelper = new CustomSnapHelper();
+        this.snapHelper = new CustomLinearSnapHelper();
         break;
       case START:
         this.snapHelper = new CarouselSnapHelper();

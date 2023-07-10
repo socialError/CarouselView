@@ -246,11 +246,17 @@ public class CarouselView extends FrameLayout {
       indexToScroll = size - 2;
     }
 
-    int offset = 300;
-    if(oldSelectedItem < indexToScroll) {
-      offset = getWidth() - offset;
+    View scrollView = layoutManager.findViewByPosition(currentItem);
+    if(scrollView == null) {
+      int offset = 300;
+      if(oldSelectedItem < indexToScroll) {
+        offset = getWidth() - offset;
+      }
+      layoutManager.scrollToPositionWithOffset(indexToScroll, offset);
     }
-    layoutManager.scrollToPositionWithOffset(indexToScroll, offset);
+    else {
+      carouselRecyclerView.scrollToPosition(indexToScroll);
+    }
     carouselRecyclerView.post(() -> {
       View view = layoutManager.findViewByPosition(currentItem);
       if (view == null) {

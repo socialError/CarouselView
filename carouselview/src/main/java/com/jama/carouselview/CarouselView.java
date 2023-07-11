@@ -412,6 +412,10 @@ public class CarouselView extends FrameLayout {
     carouselViewAdapter.notifyDataSetChanged();
   }
 
+  public void notifyItemChanged(int position) {
+    carouselViewAdapter.notifyItemChanged(position);
+  }
+
   private void validate() {
     if (!this.isResourceSet) throw new RuntimeException("Please add a resource layout to populate the carouselview");
   }

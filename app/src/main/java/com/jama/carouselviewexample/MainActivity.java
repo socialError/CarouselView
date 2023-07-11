@@ -19,7 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
   CarouselView carouselView;
-
+  List<Integer> images;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     carouselView = findViewById(R.id.carouselView);
 
-    List<Integer> images = new ArrayList<>();
+    images = new ArrayList<>();
     images.add(R.drawable.boardwalk_by_the_ocean);
     images.add(R.drawable.tying_down_tent_fly);
     images.add(R.drawable.journal_and_coffee_at_table);
@@ -56,6 +56,36 @@ public class MainActivity extends AppCompatActivity {
     images.add(R.drawable.boardwalk_by_the_ocean);
     images.add(R.drawable.tying_down_tent_fly);
     images.add(R.drawable.journal_and_coffee_at_table);
+
+    setupCarousel();
+
+    findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        carouselView.smoothScrollToItem(images.size() - 1);
+      }
+    });
+
+    findViewById(R.id.textView4).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        carouselView.smoothScrollToItem(0);
+      }
+    });
+
+    findViewById(R.id.textView3).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+//        setupCarousel();
+
+        carouselView.notifyItemChanged(1);
+      }
+    });
+
+  }
+
+  private void setupCarousel() {
+
 
     carouselView.setSize(images.size());
     carouselView.setAutoPlay(false);
@@ -89,20 +119,5 @@ public class MainActivity extends AppCompatActivity {
     });
 
     carouselView.show();
-
-    findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        carouselView.smoothScrollToItem(images.size() - 1);
-      }
-    });
-
-    findViewById(R.id.textView4).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        carouselView.smoothScrollToItem(0);
-      }
-    });
-
   }
 }

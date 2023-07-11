@@ -64,6 +64,7 @@ public class CarouselView extends FrameLayout {
     this.autoPlayHandler = new Handler();
 
     carouselRecyclerView.setHasFixedSize(false);
+    carouselRecyclerView.getItemAnimator().setChangeDuration(0);
     this.initializeAttributes(attributeSet);
   }
 
